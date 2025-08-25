@@ -7,9 +7,11 @@
 
         <div class="scroll-container" ref="scrollContainer">
           <div class="row">
-            <div v-for="(product, index) in products" :key="index">
-              <ProductCard :products="product" />
-            </div>
+            <ProductCard
+              v-for="product in productStore.allProducts"
+              :key="product.id"
+              :product="product"
+            />
           </div>
         </div>
 
@@ -21,17 +23,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import ProductCard from './ProductCard.vue'
-
-const products = ref([
-  { id: 1, title: 'لباس یک تکه سفید', price: 390000, image: '/img/product/post-card1-1.png' },
-  { id: 2, title: 'کالسکه کف قهوه ای', price: 490000, image: '/img/product/post-card1-4.png' },
-  { id: 3, title: 'تنچی دانت فارترا', price: 250000, image: '/img/product/post-card1-2.png' },
-  { id: 4, title: 'هیجان بازی!', price: 120000, image: '/img/product/post-card1-3.png' },
-  { id: 5, title: 'ماشین جرثقیل', price: 120000, image: '/img/product/post-card1-5.png' },
-])
-
+import { useProductStore } from '@/stores/productstore'
+const productStore = useProductStore()
+onMounted(() => {
+  productStore.getAllProducts()
+})
 const scrollContainer = ref(null)
 
 const scrollLeft = () => {

@@ -1,73 +1,52 @@
 <template>
   <div class="product-container">
     <!-- product card -->
-    <div v-for="product in products" :key="product.id" class="product-card">
-      <div class="ot-product product-grid bg-white">
-        <div class="product-img">
-          <img :src="product.image" alt="Product Image" />
-          <div class="actions">
-            <button class="icon-btn" @click="addToWishlist(product)">
-              <i :class="isInWishlist(product) ? 'fas fa-heart' : 'far fa-heart'"></i>
-            </button>
-            <button class="icon-btn"><i class="fa-light fa-arrows-cross"></i></button>
-            <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
-          </div>
+    <div class="ot-product product-grid bg-white">
+      <div class="product-img">
+        <img :src="product.image" alt="Product Image" />
+        <div class="actions">
+          <button class="icon-btn">
+            <i :class="false ? 'fas fa-heart' : 'far fa-heart'"></i>
+          </button>
+          <button class="icon-btn"><i class="fa-light fa-arrows-cross"></i></button>
+          <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
         </div>
+      </div>
 
-        <div class="product-content">
-          <h3 class="box-title">
-            <a href="shop-details.html">{{ product.title }}</a>
-          </h3>
-          <span class="price">{{ product.price.toLocaleString('fa-IR') }} تومان</span>
-        </div>
+      <div class="product-content">
+        <h3 class="box-title">
+          <a href="shop-details.html">{{ product.name }}</a>
+        </h3>
+        <span class="price">{{ product.price.toLocaleString('fa-IR') }} تومان</span>
+      </div>
 
-        <div class="product-hover-content">
-          <h3 class="box-title">
-            <a href="shop-details.html">{{ product.title }}</a>
-          </h3>
-          <span class="price">{{ product.price.toLocaleString('fa-IR') }} تومان</span>
+      <div class="product-hover-content">
+        <h3 class="box-title">
+          <a href="shop-details.html">{{ product.name }}</a>
+        </h3>
+        <span class="price">{{ product.price.toLocaleString('fa-IR') }} تومان</span>
 
-          <a class="ot-btn" href="#" @click.prevent="addToCart(product)">
-            <i class="fa-light fa-basket-shopping me-1"></i> افزودن به سبد خرید
-          </a>
-        </div>
+        <a class="ot-btn" href="#" @click.prevent="addToCart(product)">
+          <i class="fa-light fa-basket-shopping me-1"></i> افزودن به سبد خرید
+        </a>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useCartStore } from '@/stores/cartStore' // ✅ ایمپورت استور
 
-const cartStore = useCartStore() // ✅ ساخت نمونه استور
-
-const products = ref([
-  { id: 1, title: 'لگو آموزشی', image: '/img/product/post-card1-3.png', price: 250000 },
-  { id: 2, title: 'توپ فضای باز', image: '/img/product/post-card1-4.png', price: 110000 },
-  { id: 3, title: 'کتاب قصه', image: '/img/product/post-card1-5.png', price: 80000 },
-  { id: 4, title: 'لباس بچه طرح خرس', image: '/img/product/post-card1-6.png', price: 150000 },
-
-])
-
-const wishlist = ref([])
+const props = defineProps({
+  product: {
+    type: Object,
+    required: true
+  }
+})
 
 // ✅ افزودن به سبد خرید (الان با Pinia)
 function addToCart(product) {
   cartStore.addToCart(product)
   console.log('سبد خرید:', cartStore.items)
-}
-
-function addToWishlist(product) {
-  if (!isInWishlist(product)) {
-    wishlist.value.push(product)
-  } else {
-    wishlist.value = wishlist.value.filter((p) => p.id !== product.id)
-  }
-}
-
-function isInWishlist(product) {
-  return wishlist.value.some((p) => p.id === product.id)
 }
 </script>
 
