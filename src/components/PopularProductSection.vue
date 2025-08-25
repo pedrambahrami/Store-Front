@@ -2,20 +2,22 @@
   <section class="space">
     <div class="container rtl">
       <div class="scroll-wrapper">
-        <!-- فلش سمت راست -->
+        
         <button class="scroll-btn right" @click="scrollRight">&#10094;</button>
 
         <div class="scroll-container" ref="scrollContainer">
           <div class="row">
-            <ProductCard
-              v-for="product in productStore.allProducts"
-              :key="product.id"
-              :product="product"
-            />
+            <div class="product-container">
+              <ProductCard
+                v-for="product in productStore.bestProducts"
+                :key="product.id"
+                :product="product"
+              />
+            </div>
           </div>
         </div>
 
-        <!-- فلش سمت چپ -->
+        
         <button class="scroll-btn left" @click="scrollLeft">&#10095;</button>
       </div>
     </div>
@@ -28,7 +30,7 @@ import ProductCard from './ProductCard.vue'
 import { useProductStore } from '@/stores/productstore'
 const productStore = useProductStore()
 onMounted(() => {
-  productStore.getAllProducts()
+  productStore.getBests()
 })
 const scrollContainer = ref(null)
 
@@ -46,12 +48,23 @@ const scrollRight = () => {
   position: relative;
 }
 
+.product-container {
+  padding-top: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+  gap: 20px;
+  width: 100%;
+  padding-bottom: 10px;
+  -webkit-overflow-scrolling: touch;
+}
+
 .scroll-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(8, 169, 190, 0.8);
   border: none;
   padding: 0.5rem 0.8rem;
   cursor: pointer;
@@ -73,17 +86,16 @@ const scrollRight = () => {
   right: -15px;
 }
 
-/* کانتینر اسکرول برای حذف کامل نوار */
 .scroll-container {
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 }
 
 .scroll-container::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none; 
 }
 
 .row {

@@ -1,46 +1,42 @@
 <template>
-  <div class="product-container">
-    <!-- product card -->
-    <div class="ot-product product-grid bg-white">
-      <div class="product-img">
-        <img :src="product.image" alt="Product Image" />
-        <div class="actions">
-          <button class="icon-btn">
-            <i :class="false ? 'fas fa-heart' : 'far fa-heart'"></i>
-          </button>
-          <button class="icon-btn"><i class="fa-light fa-arrows-cross"></i></button>
-          <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
-        </div>
+  <div class="ot-product product-grid bg-red">
+    <div class="product-img">
+      <img :src="product.image" alt="Product Image" />
+      <div class="actions">
+        <button class="icon-btn">
+          <i :class="false ? 'fas fa-heart' : 'far fa-heart'"></i>
+        </button>
+        <button class="icon-btn"><i class="fa-light fa-arrows-cross"></i></button>
+        <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
       </div>
+    </div>
 
-      <div class="product-content">
-        <h3 class="box-title">
-          <a href="shop-details.html">{{ product.name }}</a>
-        </h3>
-        <span class="price">{{ product.price.toLocaleString('fa-IR') }} تومان</span>
-      </div>
+    <div class="product-content">
+      <h3 class="box-title">
+        <a href="shop-details.html">{{ product.name }}</a>
+      </h3>
+      <span class="price">{{ product.price.toLocaleString('fa-IR') }} تومان</span>
+    </div>
 
-      <div class="product-hover-content">
-        <h3 class="box-title">
-          <a href="shop-details.html">{{ product.name }}</a>
-        </h3>
-        <span class="price">{{ product.price.toLocaleString('fa-IR') }} تومان</span>
+    <div class="product-hover-content">
+      <h3 class="box-title">
+        <a href="shop-details.html">{{ product.name }}</a>
+      </h3>
+      <span class="price">{{ product.price.toLocaleString('fa-IR') }} تومان</span>
 
-        <a class="ot-btn" href="#" @click.prevent="addToCart(product)">
-          <i class="fa-light fa-basket-shopping me-1"></i> افزودن به سبد خرید
-        </a>
-      </div>
+      <a class="ot-btn" href="#" @click.prevent="addToCart(product)">
+        <i class="fa-light fa-basket-shopping me-1"></i> افزودن به سبد خرید
+      </a>
     </div>
   </div>
 </template>
 
 <script setup>
-
 const props = defineProps({
   product: {
     type: Object,
-    required: true
-  }
+    required: true,
+  },
 })
 
 // ✅ افزودن به سبد خرید (الان با Pinia)
@@ -51,17 +47,6 @@ function addToCart(product) {
 </script>
 
 <style>
-.product-container {
-  padding-top: 10px;
-
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: hidden;
-  gap: 20px;
-  width: 100%;
-  padding-bottom: 10px;
-  -webkit-overflow-scrolling: touch;
-}
 .product-card {
   box-sizing: border-box;
   min-width: calc(25% - 15px);

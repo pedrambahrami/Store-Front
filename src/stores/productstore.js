@@ -5,6 +5,7 @@ import { toast } from 'vue3-toastify'
 export const useProductStore = defineStore('product', {
   state: () => ({
     allProducts: [],
+    bestProducts: [],
     dataLoading: false,
 
     productForm: {
@@ -21,6 +22,19 @@ export const useProductStore = defineStore('product', {
         this.dataLoading = true
         const response = await productService.get()
         this.allProducts = response.data.data
+        toast.success('محصولات با موفقیت بارگذاری شدند!')
+      } catch (error) {
+        toast.error('خطا در بارگذاری محصولات')
+        console.log(error)
+      } finally {
+        this.dataLoading = false
+      }
+    },
+    async getBests() {
+      try {
+        this.dataLoading = true
+        const response = await productService.bestsellers()
+        this.bestProducts = response.data.data
         toast.success('محصولات با موفقیت بارگذاری شدند!')
       } catch (error) {
         toast.error('خطا در بارگذاری محصولات')

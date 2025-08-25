@@ -57,19 +57,20 @@
       </div>
     </div>
     <div class="product-grid">
-      <ProductCard v-for="product in products" :key="product.id" :product="product" />
+      <ProductCard v-for="product in productStore.allProducts" :key="product.id" :product="product" />
     </div>
   </div>
 </template>
 
 <script setup>
 import ProductCard from '@/components/ProductCard.vue'
+import { onMounted, ref } from 'vue'
 
-const products = [
-  { id: 1, title: 'چرخش دوگانه فراتر از', price: 12000, image: '/img/products/post-card1-6.png' },
-  { id: 2, title: 'عروسک قرمز گرد', price: 14000, image: '/img/products/post-card1-15.png' },
-  { id: 3, title: 'لباس یک تکه سفید', price: 19000, image: '/img/products/post-card1-1.png' },
-]
+import { useProductStore } from '@/stores/productstore'
+const productStore = useProductStore()
+onMounted(() => {
+  productStore.getAllProducts()
+})
 </script>
 
 <style scoped>
@@ -78,14 +79,14 @@ const products = [
   text-align: center;
 }
 
-/* همه محصولات زیر هم */
+
 .product-grid {
   display: flex;
-  flex-direction: column; /* چینش عمودی */
-  gap: 20px; /* فاصله بین محصولات */
+  flex-direction: column;
+  gap: 20px; 
 }
 
 .product-card {
-  width: 100%; /* کل عرض رو بگیره */
+  width: 100%; 
 }
 </style>

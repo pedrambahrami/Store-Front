@@ -22,5 +22,8 @@ export const productService = {
 
   update(productId, formData){
     return api.put(`products/${productId}`, formData)
+  },
+  bestsellers() {
+    return api.get(`products/bestsellers`)
   }
 }
