@@ -11,4 +11,8 @@ export default {
   async verifyOtp(phone_number, otp) {
     return api.post('auth/verify-otp', { phone_number, otp })
   },
+
+  async user() {
+    return api.get('auth/user')
+  },
 }

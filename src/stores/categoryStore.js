@@ -14,7 +14,7 @@ export const useCategoryStore = defineStore('category', {
       this.error = null
       try {
         const res = await categoryService.getAll()
-        this.categories = res.data.data
+        this.categories = res.data.data.data
       } catch (err) {
         this.error = err.response?.data?.message || 'خطا در دریافت دسته‌بندی‌ها'
       } finally {
