@@ -2,22 +2,18 @@
   <section class="space">
     <div class="container rtl">
       <div class="scroll-wrapper">
-        
         <button class="scroll-btn right" @click="scrollRight">&#10094;</button>
 
         <div class="scroll-container" ref="scrollContainer">
-          <div class="row">
-            <div class="product-container">
-              <ProductCard
-                v-for="product in productStore.bestProducts"
-                :key="product.id"
-                :product="product"
-              />
-            </div>
+          <div class="product-container">
+            <ProductCard
+              v-for="product in productStore.bestProducts"
+              :key="product.id"
+              :product="product"
+            />
           </div>
         </div>
 
-        
         <button class="scroll-btn left" @click="scrollLeft">&#10095;</button>
       </div>
     </div>
@@ -28,10 +24,13 @@
 import { onMounted, ref } from 'vue'
 import ProductCard from './ProductCard.vue'
 import { useProductStore } from '@/stores/productstore'
+
 const productStore = useProductStore()
+
 onMounted(() => {
   productStore.getBests()
 })
+
 const scrollContainer = ref(null)
 
 const scrollLeft = () => {
@@ -49,14 +48,15 @@ const scrollRight = () => {
 }
 
 .product-container {
-  padding-top: 10px;
   display: flex;
   flex-wrap: nowrap;
-  overflow-x: hidden;
   gap: 20px;
-  width: 100%;
-  padding-bottom: 10px;
-  -webkit-overflow-scrolling: touch;
+  padding: 10px 0;
+}
+
+.product-container > * {
+  flex: 0 0 auto; /* ✅ جلوگیری از کوچک شدن کارت‌ها */
+  width: 300px; /* ✅ اندازه ثابت برای همه کارت‌ها */
 }
 
 .scroll-btn {
@@ -90,16 +90,11 @@ const scrollRight = () => {
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  scrollbar-width: none; 
-  -ms-overflow-style: none; 
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .scroll-container::-webkit-scrollbar {
-  display: none; 
-}
-
-.row {
-  display: flex;
-  flex-wrap: nowrap;
+  display: none;
 }
 </style>

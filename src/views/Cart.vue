@@ -56,17 +56,10 @@
         </div>
       </div>
     </div>
-    <ShoppingCart />
+    <CartTable />
+
+    <CartSummary />
   </div>
 </template>
 
-<script>
-import ShoppingCart from '@/components/ShoppingCart.vue'
-
-export default {
-  name: 'CartPage',
-  components: {
-    ShoppingCart,
-  },
-}
-</script>
+<script></script>

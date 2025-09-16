@@ -1,21 +1,46 @@
-// src/stores/cartStore.js
 import { defineStore } from 'pinia'
+import Cartservice from '@/services/Cartservice'
+import { toast } from 'vue3-toastify'
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    items: []
+    items: [],
   }),
   actions: {
-    addToCart(product) {
-      const existing = this.items.find(p => p.id === product.id)
-      if (existing) {
-        existing.quantity += product.quantity
-      } else {
-        this.items.push({ ...product })
+    async addToCart(product) {
+      try {
+        const data = {
+          "product_id": product.id,
+          "quantity": 1,
+         "price": product.price
+        }
+        const res = await Cartservice.addcartitem(data)
+        this.items = res.data.cart_items
+        toast.success('محصول با موفقیت به سبد اضافه شد!')
+      } catch (error) {
+        console.error('Error adding to cart:', error)
+        toast.error('خطایی در افزودن محصول رخ داد!')
       }
     },
-    removeFromCart(id) {
-      this.items = this.items.filter(p => p.id !== id)
-    }
-  }
+
+    async removeFromCart(id) {
+      try {
+        const res = await Cartservice.deletecartitem(id)
+  
+        toast.success('محصول با موفقیت حذف شد!')
+      } catch (error) {
+        console.error('Error removing from cart:', error)
+        toast.error('خطا در حذف محصول!')
+      }
+    },
+
+    async getusercart() {
+      try {
+        const res = await Cartservice.getcartforuser()
+        this.items = res.data
+      } catch (error) {
+        console.error('Error fetching user cart:', error)
+      }
+    },
+  },
 })

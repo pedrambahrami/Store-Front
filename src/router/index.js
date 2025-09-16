@@ -11,11 +11,12 @@ import Orders from '@/views/admin/Orders.vue'
 import Categories from '@/views/admin/Categories.vue'
 import Customers from '@/views/admin/Customers.vue'
 import Settings from '@/views/admin/Settings.vue'
+import Cart from '@/views/Cart.vue'
 
 const routes = [
   { path: '/', component: Home },
   { path: '/product/:id', component: ProductDetails },
-  { path: '/cart', component: () => import('@/views/Cart.vue') },
+  { path: '/cart', component: Cart},
   { path: '/checkout', component: Checkout },
   { path: '/shop', component: Shop },
   { path: '/auth', name: 'AuthForm', component: AuthForm },

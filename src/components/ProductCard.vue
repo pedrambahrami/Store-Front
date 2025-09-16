@@ -32,6 +32,10 @@
 </template>
 
 <script setup>
+import { useCartStore } from '@/stores/cartStore'
+const cartStore = useCartStore()
+
+
 const props = defineProps({
   product: {
     type: Object,
