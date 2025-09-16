@@ -46,7 +46,7 @@ defineProps({
 .ot-hero-wrapper {
   position: relative;
   border-radius: 99px;
-  height: 100vh;
+  height: 80vh;
   width: 100%;
   background-size: cover;
   background-position: center;

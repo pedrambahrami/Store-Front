@@ -28,7 +28,9 @@
             <div class="header-links">
               <ul>
                 <li><i class="fal fa-comments-question"></i> <a href="contact.html">راهنما</a></li>
-                <li><i class="fal fa-user"></i><router-link to="/auth">ورود | ثبت نام</router-link></li>
+                <li>
+                  <i class="fal fa-user"></i><router-link to="/auth">ورود | ثبت نام</router-link>
+                </li>
               </ul>
             </div>
           </div>
@@ -123,8 +125,8 @@
                   <span class="badge">3</span>
                   <i class="far fa-heart"></i>
                 </router-link>
-                <button type="button" class="icon-btn sideMenuCart">
-                  <span class="badge">5</span>
+                <button type="button" class="icon-btn sideMenuCart" @click="isCartOpen = true">
+                  <span class="badge">{{ cartItems.length }}</span>
                   <i class="far fa-basket-shopping"></i>
                 </button>
                 <button type="button" class="icon-btn sideMenuInfo d-none d-lg-block">
@@ -139,9 +141,39 @@
         </div>
       </div>
     </div>
+    <div v-if="isCartOpen" class="backdrop" @click="isCartOpen = false"></div>
+
+    <transition name="slide">
+      <CartSidebar v-if="isCartOpen" @close="isCartOpen = false" />
+    </transition>
   </header>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+import CartSidebar from '@/components/CartSidebar.vue'
+const isCartOpen = ref(false)
+// می‌تونی بعدا از Pinia/Vuex بگیری
+const cartItems = ref([
+  { id: 1, name: 'محصول تستی', price: 1200, quantity: 1 },
+  { id: 2, name: 'محصول تستی ۲', price: 800, quantity: 2 },
+])
+</script>
 
-<style></style>
+<style>
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease;
+}
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(-100%);
+}
+</style>
