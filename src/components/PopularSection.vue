@@ -144,7 +144,7 @@ const products = ref([
   {
     id: 1,
     title: 'لگو آموزشی',
-    image: '/img/product/post-card1-3.png',
+    image: 'https://tapiranco.ir/wp-content/uploads/2020/12/PicsArt_12-03-04.58.42.jpg',
     price: 250000,
     category: 'اسباب بازی کودک',
   },

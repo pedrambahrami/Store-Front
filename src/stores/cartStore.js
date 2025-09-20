@@ -5,6 +5,7 @@ import { toast } from 'vue3-toastify'
 export const useCartStore = defineStore('cart', {
   state: () => ({
     items: [],
+    totalCount : 0,
   }),
   actions: {
     async addToCart(product) {
@@ -15,7 +16,8 @@ export const useCartStore = defineStore('cart', {
          "price": product.price
         }
         const res = await Cartservice.addcartitem(data)
-        this.items = res.data.cart_items
+        this.items = res.data.data.cart_items
+        this.totalCount = this.items.length
         toast.success('محصول با موفقیت به سبد اضافه شد!')
       } catch (error) {
         console.error('Error adding to cart:', error)
@@ -37,7 +39,8 @@ export const useCartStore = defineStore('cart', {
     async getusercart() {
       try {
         const res = await Cartservice.getcartforuser()
-        this.items = res.data
+        this.items = res.data.data.cart_items
+        this.totalCount = this.items.length
       } catch (error) {
         console.error('Error fetching user cart:', error)
       }

@@ -126,7 +126,7 @@
                   <i class="far fa-heart"></i>
                 </router-link>
                 <button type="button" class="icon-btn sideMenuCart" @click="isCartOpen = true">
-                  <span class="badge">{{ cartItems.length }}</span>
+                  <span class="badge">{{cartStore.totalCount}}</span>
                   <i class="far fa-basket-shopping"></i>
                 </button>
                 <button type="button" class="icon-btn sideMenuInfo d-none d-lg-block">
@@ -150,14 +150,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import CartSidebar from '@/components/CartSidebar.vue'
 const isCartOpen = ref(false)
+import { useCartStore } from '@/stores/cartStore'
 // می‌تونی بعدا از Pinia/Vuex بگیری
-const cartItems = ref([
-  { id: 1, name: 'محصول تستی', price: 1200, quantity: 1 },
-  { id: 2, name: 'محصول تستی ۲', price: 800, quantity: 2 },
-])
+const cartStore=useCartStore()
+onMounted(()=> {
+  cartStore.getusercart()
+})
 </script>
 
 <style>

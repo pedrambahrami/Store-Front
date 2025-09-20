@@ -14,18 +14,17 @@
             :key="index"
             class="woocommerce-mini-cart-item mini_cart_item"
           >
-            <a href="#" class="remove remove_from_cart_button" @click.prevent="removeItem(index)">
+            <a href="#" class="remove remove_from_cart_button" @click.prevent="removeFromCart(item.id)">
               <i class="far fa-times"></i>
             </a>
             <a href="#">
-              <img :src="item.image" alt="Cart Image" />
-              {{ item.name }}
+              <img :src="item.product.image" alt="Cart Image" />
             </a>
             <span class="quantity">
               {{ item.quantity }} ×
               <span class="woocommerce-Price-amount amount">
                 <span class="woocommerce-Price-currencySymbol">تومان</span>
-                {{ item.price }}
+                {{ item.product.price }}
               </span>
             </span>
           </li>
@@ -49,48 +48,19 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useCartStore } from '@/stores/cartStore';
+const cartStore = useCartStore()
+onMounted(() => {
+  cartStore.getusercart()
+})
+const cartItems = cartStore.items
 
-const cartItems = ref([
-  {
-    name: 'لباس تک تکه سفید',
-    image: '/img/product/post-card1-1.png',
-    quantity: 1,
-    price: 940.0,
-  },
-  {
-    name: 'اسباب بازی قرمز گرد جدید',
-    image: '/img/product/post-card1-2.png',
-    quantity: 1,
-    price: 899.0,
-  },
-  {
-    name: 'هیجان بازی!',
-    image: '/img/product/post-card1-3.png',
-    quantity: 1,
-    price: 756.0,
-  },
-  {
-    name: 'کالسکه کف قهوه ای',
-    image: '/img/product/post-card1-4.png',
-    quantity: 1,
-    price: 723.0,
-  },
-  {
-    name: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم',
-    image: '/img/product/post-card1-5.png',
-    quantity: 1,
-    price: 1080.0,
-  },
-])
-
-const removeItem = (index) => {
-  cartItems.value.splice(index, 1)
+function removeItemFromCart(id) {
+  return cartStore.removeFromCart(id);
 }
 
-const totalPrice = computed(() =>
-  cartItems.value.reduce((sum, item) => sum + item.price * item.quantity, 0),
-)
+const totalPrice = 0
 </script>
 
 <style>
