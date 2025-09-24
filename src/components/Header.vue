@@ -2,7 +2,9 @@
   <header class="ot-header header-layout1">
     <div class="header-top">
       <div class="container rtl">
-        <div class="row justify-content-center justify-content-lg-between align-items-center gy-2">
+        <div
+          class="row justify-content-center justify-content-lg-between align-items-center gy-2"
+        >
           <div class="col-auto d-none d-lg-block">
             <div class="header-links">
               <ul>
@@ -14,22 +16,29 @@
                 </li>
                 <li>
                   <i class="fas fa-envelope"></i>
-                  <a href="mailto:info@example.com">pedram.bahrame1382@gmail.com</a>
+                  <a href="mailto:info@example.com"
+                    >pedram.bahrame1382@gmail.com</a
+                  >
                 </li>
               </ul>
             </div>
           </div>
           <div class="col-auto">
             <p class="header-notice">
-              تخفیف فلش بیبی مارت: شروع از <span class="text-title">100% تخفیف</span>
+              تخفیف فلش بیبی مارت: شروع از
+              <span class="text-title">100% تخفیف</span>
             </p>
           </div>
           <div class="col-auto d-none d-xl-block">
             <div class="header-links">
               <ul>
-                <li><i class="fal fa-comments-question"></i> <a href="contact.html">راهنما</a></li>
                 <li>
-                  <i class="fal fa-user"></i><router-link to="/auth">ورود | ثبت نام</router-link>
+                  <i class="fal fa-comments-question"></i>
+                  <a href="contact.html">راهنما</a>
+                </li>
+                <li>
+                  <i class="fal fa-user"></i
+                  ><router-link to="/auth">ورود | ثبت نام</router-link>
                 </li>
               </ul>
             </div>
@@ -38,22 +47,7 @@
       </div>
     </div>
 
-    <li class="category-menu" :class="{ active: isCategoryOpen }">
-      <a href="javascript:void(0)" class="category-toggle" @click="toggleCategory">
-        <i class="fa fa-bars"></i> دسته‌بندی کالاها
-      </a>
-      <div class="mega-menu">
-        <div v-for="cat in categories" :key="cat.id" class="mega-col">
-          <h4>{{ cat.name }}</h4>
-          <ul>
-            <li v-for="sub in cat.subcategories" :key="sub.id">
-              <router-link :to="'/category/' + sub.slug">{{ sub.name }}</router-link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </li>
-
+    <!-- منوی اصلی -->
     <div class="sticky-wrapper">
       <div class="menu-area">
         <div class="container rtl">
@@ -82,10 +76,18 @@
                     <a href="#">خرید</a>
                     <ul class="sub-menu">
                       <li><router-link to="shop">خرید</router-link></li>
-                      <li><router-link to="/shop-details">جزئیات فروشگاه</router-link></li>
+                      <li>
+                        <router-link to="/shop-details"
+                          >جزئیات فروشگاه</router-link
+                        >
+                      </li>
                       <li><router-link to="/cart">سبد خرید</router-link></li>
-                      <li><router-link to="/checkout">تسویه حساب</router-link></li>
-                      <li><router-link to="/wishlist">لیست علاقمندی</router-link></li>
+                      <li>
+                        <router-link to="/checkout">تسویه حساب</router-link>
+                      </li>
+                      <li>
+                        <router-link to="/wishlist">لیست علاقمندی</router-link>
+                      </li>
                     </ul>
                   </li>
 
@@ -103,12 +105,48 @@
                     <a href="#">وبلاگ</a>
                     <ul class="sub-menu">
                       <li><router-link to="/blog">وبلاگ</router-link></li>
-                      <li><router-link to="/blog-grid">سبک شبکه وبلاگ</router-link></li>
-                      <li><router-link to="/blog-details">جزئیات وبلاگ</router-link></li>
+                      <li>
+                        <router-link to="/blog-grid">سبک شبکه وبلاگ</router-link>
+                      </li>
+                      <li>
+                        <router-link to="/blog-details"
+                          >جزئیات وبلاگ</router-link
+                        >
+                      </li>
                     </ul>
                   </li>
 
                   <li><router-link to="/contact">با ما تماس بگیرید</router-link></li>
+
+                  <!-- دسته بندی کالاها (داخل UL) -->
+                  <!-- <li class="category-menu" :class="{ active: isCategoryOpen }">
+                    <a
+                      href="javascript:void(0)"
+                      class="category-toggle"
+                      @click="toggleCategory"
+                    >
+                      <i class="fa fa-bars"></i> دسته‌بندی کالاها
+                    </a>
+                    <div class="mega-menu">
+                      <div
+                        v-for="cat in categories"
+                        :key="cat.id"
+                        class="mega-col"
+                      >
+                        <h4>{{ cat.name }}</h4>
+                        <ul>
+                          <li
+                            v-for="sub in cat.subcategories"
+                            :key="sub.id"
+                          >
+                            <router-link :to="'/category/' + sub.slug">
+                              {{ sub.name }}
+                            </router-link>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li> -->
                 </ul>
               </nav>
             </div>
@@ -116,8 +154,6 @@
             <div class="col-auto">
               <div class="header-button">
                 <form action="#" class="header-form">
-                  <!-- جایگزین div.form-group با select -->
-
                   <div class="form-group">
                     <input
                       type="text"
@@ -133,11 +169,18 @@
                   <span class="badge">3</span>
                   <i class="far fa-heart"></i>
                 </router-link>
-                <button type="button" class="icon-btn sideMenuCart" @click="isCartOpen = true">
+                <button
+                  type="button"
+                  class="icon-btn sideMenuCart"
+                  @click="isCartOpen = true"
+                >
                   <span class="badge">{{ cartStore.totalCount }}</span>
                   <i class="far fa-basket-shopping"></i>
                 </button>
-                <button type="button" class="icon-btn sideMenuInfo d-none d-lg-block">
+                <button
+                  type="button"
+                  class="icon-btn sideMenuInfo d-none d-lg-block"
+                >
                   <i class="far fa-bars-sort"></i>
                 </button>
                 <button type="button" class="ot-menu-toggle d-block d-lg-none">
@@ -149,6 +192,7 @@
         </div>
       </div>
     </div>
+
     <div v-if="isCartOpen" class="backdrop" @click="isCartOpen = false"></div>
 
     <transition name="slide">
@@ -158,56 +202,58 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import CartSidebar from '@/components/CartSidebar.vue'
-const isCartOpen = ref(false)
-import { useCartStore } from '@/stores/cartStore'
-const cartStore = useCartStore()
+import { ref, onMounted } from "vue";
+import CartSidebar from "@/components/CartSidebar.vue";
+import { useCartStore } from "@/stores/cartStore";
+
+const isCartOpen = ref(false);
+const cartStore = useCartStore();
 
 onMounted(() => {
-  cartStore.getusercart()
-})
-const isCategoryOpen = ref(false)
+  cartStore.getusercart();
+});
+
+const isCategoryOpen = ref(false);
 
 function toggleCategory() {
-  isCategoryOpen.value = !isCategoryOpen.value
+  isCategoryOpen.value = !isCategoryOpen.value;
 }
 
 const categories = ref([
   {
     id: 1,
-    name: 'کالای دیجیتال',
+    name: "کالای دیجیتال",
     subcategories: [
-      { id: 11, name: 'موبایل', slug: 'mobile' },
-      { id: 12, name: 'لپ‌تاپ', slug: 'laptop' },
-      { id: 13, name: 'ساعت هوشمند', slug: 'smart-watch' },
+      { id: 11, name: "موبایل", slug: "mobile" },
+      { id: 12, name: "لپ‌تاپ", slug: "laptop" },
+      { id: 13, name: "ساعت هوشمند", slug: "smart-watch" },
     ],
   },
   {
     id: 2,
-    name: 'خانه و آشپزخانه',
+    name: "خانه و آشپزخانه",
     subcategories: [
-      { id: 21, name: 'لوازم برقی', slug: 'home-appliances' },
-      { id: 22, name: 'دکوراسیون', slug: 'decoration' },
+      { id: 21, name: "لوازم برقی", slug: "home-appliances" },
+      { id: 22, name: "دکوراسیون", slug: "decoration" },
     ],
   },
   {
     id: 3,
-    name: 'مد و پوشاک',
+    name: "مد و پوشاک",
     subcategories: [
-      { id: 31, name: 'زنانه', slug: 'women' },
-      { id: 32, name: 'مردانه', slug: 'men' },
+      { id: 31, name: "زنانه", slug: "women" },
+      { id: 32, name: "مردانه", slug: "men" },
     ],
   },
   {
     id: 4,
-    name: 'سلامت و زیبایی',
+    name: "سلامت و زیبایی",
     subcategories: [
-      { id: 41, name: 'آرایشی', slug: 'cosmetics' },
-      { id: 42, name: 'بهداشتی', slug: 'health' },
+      { id: 41, name: "آرایشی", slug: "cosmetics" },
+      { id: 42, name: "بهداشتی", slug: "health" },
     ],
   },
-])
+]);
 </script>
 
 <style>
@@ -227,58 +273,45 @@ const categories = ref([
   transform: translateX(-100%);
 }
 
-/* مگا منوی دسته بندی */
-.category-menu {
+/* آیتم دسته‌بندی مثل بقیه منوها */
+.main-menu > ul > li.category-menu {
   position: relative;
+  display: inline-block;
 }
 
-.category-menu .category-toggle {
-  cursor: pointer;
-  display: flex;
-  width: 150px;
-  margin-bottom: 5px;
-  background-color: rgb(11, 185, 185);
-  align-items: center;
-  gap: 5px;
+.main-menu > ul > li.category-menu > a {
   font-weight: 500;
   color: #333;
-  padding: 8px 12px;
-  border-radius: 6px;
-  transition:
-    background 0.2s,
-    color 0.2s;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.3s ease;
 }
 
-.category-menu .category-toggle:hover {
-  background: rgba(0, 0, 0, 0.05);
+.main-menu > ul > li.category-menu > a:hover {
   color: #ff6f61;
 }
 
-.category-menu .mega-menu {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* پیش‌فرض ۴ ستون */
-  gap: 20px;
+/* مگا منو */
+.main-menu > ul > li.category-menu .mega-menu {
+  display: none;
   position: absolute;
-  top: 110%; /* کمی فاصله از دکمه */
+  top: 100%;
   right: 0;
-  min-width: 700px;
+  width: 600px;
   background: #fff;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
-  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
   z-index: 999;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(15px);
-  transition: all 0.3s ease;
-  max-height: 70vh; /* محدودیت ارتفاع */
-  overflow-y: auto; /* اسکرول عمودی */
 }
 
-.category-menu.active .mega-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+/* وقتی فعال باشه نمایش بده */
+.main-menu > ul > li.category-menu.active .mega-menu {
+  display: grid;
 }
 
 .mega-col h4 {
@@ -305,25 +338,5 @@ const categories = ref([
 
 .mega-col ul li a:hover {
   color: #ff6f61;
-}
-
-/* برای هماهنگی با منوی اصلی */
-.main-menu .category-menu {
-  display: inline-block; /* در کنار آیتم های ul قرار بگیرد */
-  vertical-align: middle;
-  margin-left: 15px;
-}
-
-.main-menu .category-menu .mega-menu {
-  right: 0;
-  top: 100%;
-}
-
-@media (max-width: 991px) {
-  /* در موبایل منو کامل می شود */
-  .main-menu .category-menu {
-    display: block;
-    margin-left: 0;
-  }
 }
 </style>
