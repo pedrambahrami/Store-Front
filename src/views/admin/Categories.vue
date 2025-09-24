@@ -24,7 +24,7 @@ const handleImageUpload = (event) => {
 // compute children based on selection
 const level2Options = computed(() => {
   if (!selectedLevel1.value) return [];
-  const parent = store.categories.find(c => c.id === selectedLevel1.value);
+  const parent = store.nested_categories.find(c => c.id === selectedLevel1.value);
   return parent ? parent.children : [];
 });
 
@@ -88,7 +88,7 @@ onMounted(async () => {
 
       <!-- Level 1 -->
       <select v-model="selectedLevel1" class="input-text">
-        <option :value="null">دسته‌بندی اصلی</option>
+        <option :value="''">دسته‌بندی اصلی</option>
         <option
           v-for="cat in store.nested_categories"
           :key="cat.id"
@@ -202,8 +202,8 @@ onMounted(async () => {
 .file-input {
   font-size: 18px;
   border-radius: 10px;
-  margin: 0 auto; /* این باعث میشه وسط بیاد */
-  display: block; /* چون input پیش‌فرض inline هست */
+  margin: 0 auto; 
+  display: block; 
 }
 
 .add-btn {
