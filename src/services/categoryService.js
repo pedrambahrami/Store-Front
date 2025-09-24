@@ -1,36 +1,31 @@
-import api from './api' // فرض بر این که api.js تنظیم شده
+import api from './api'
 
 export default {
-  getAll() {
-    return api.get('/categories')
+  async fetchAllCategories() {
+    return await api.get('/categories')
   },
 
-  create(category) {
+  async addCategory(category) {
     const formData = new FormData()
     formData.append('name', category.name)
-    formData.append(
-      'slug',
-      category.slug || category.name.trim().replace(/\s+/g, '-').toLowerCase(),
-    )
     if (category.image) formData.append('image', category.image)
-    console.log(category.image)
-    return api.post('/categories', formData, {
+    if (category.parent_id) formData.append('parent_id', category.parent_id)
+    return await api.post('/categories', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
   },
 
-  update(id, updatedData) {
+  async updateCategory(id, updatedData) {
     const formData = new FormData()
     if (updatedData.name) formData.append('name', updatedData.name)
-    if (updatedData.slug) formData.append('slug', updatedData.slug)
     if (updatedData.image) formData.append('image', updatedData.image)
 
-    return api.post(`/categories/${id}?_method=PUT`, formData, {
+    return await api.post(`/categories/${id}?_method=PUT`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
   },
 
-  delete(id) {
-    return api.delete(`/categories/${id}`)
+  async deleteCategory(id) {
+    return await api.delete(`/categories/${id}`)
   },
 }

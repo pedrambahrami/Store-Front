@@ -6,7 +6,7 @@ export const useProductStore = defineStore('product', {
   state: () => ({
     allProducts: [],
     bestProducts: [],
-    dataLoading: false,
+    loading: false,
 
     productForm: {
       name: null,

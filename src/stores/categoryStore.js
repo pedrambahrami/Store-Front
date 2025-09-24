@@ -1,8 +1,32 @@
 import { defineStore } from 'pinia'
 import categoryService from '@/services/categoryService'
 
+
+
+function buildCategoryTree(categories) {
+  const map = []
+  const roots = []
+
+  categories.forEach(category => {
+    map[category.id] = {...category, children: []}
+  })
+  categories.forEach(category => {
+    if (category.parent) {
+      if (map[category.parent.id]) {
+        map[category.parent.id].children.push(map[category.id])
+      }
+    } else {
+      roots.push(map[category.id])
+    }
+  })
+  return roots
+
+}
+
+
 export const useCategoryStore = defineStore('category', {
   state: () => ({
+    nested_categories: [],
     categories: [],
     loading: false,
     error: null,
@@ -13,8 +37,9 @@ export const useCategoryStore = defineStore('category', {
       this.loading = true
       this.error = null
       try {
-        const res = await categoryService.getAll()
-        this.categories = res.data.data.data
+        const res = await categoryService.fetchAllCategories()
+        this.categories = res.data.data
+        this.nested_categories = buildCategoryTree(res.data.data)
       } catch (err) {
         this.error = err.response?.data?.message || 'خطا در دریافت دسته‌بندی‌ها'
       } finally {
@@ -22,18 +47,17 @@ export const useCategoryStore = defineStore('category', {
       }
     },
 
-    async addCategory({ name, image }) {
+    async addCategory({ name, image, parent_id }) {
       this.loading = true
       this.error = null
 
       try {
         const category = {
           name,
-          slug: name.trim().replace(/\s+/g, '-').toLowerCase(),
-          image, // فرض بر این که رشته هست، مثل URL یا base64
+          image,
+          parent_id,
         }
-        const res = await categoryService.create(category)
-        this.categories.push(res.data.data)
+        const res = await categoryService.addCategory(category)
       } catch (err) {
         this.error = err.response?.data?.message || 'خطا در افزودن دسته‌بندی'
       } finally {
@@ -44,7 +68,7 @@ export const useCategoryStore = defineStore('category', {
       this.loading = true
       this.error = null
       try {
-        const res = await categoryService.update(id, updatedData)
+        const res = await categoryService.updateCategory(id, updatedData)
         const index = this.categories.findIndex((cat) => cat.id === id)
         if (index !== -1) this.categories[index] = res.data.data
       } catch (err) {
@@ -58,7 +82,7 @@ export const useCategoryStore = defineStore('category', {
       this.loading = true
       this.error = null
       try {
-        await categoryService.delete(id)
+        await categoryService.deleteCategory(id)
         this.categories = this.categories.filter((cat) => cat.id !== id)
       } catch (err) {
         this.error = err.response?.data?.message || 'خطا در حذف دسته‌بندی'

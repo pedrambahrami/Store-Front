@@ -3,8 +3,11 @@
     <div class="container rtl">
       <div class="scroll-wrapper">
         <button class="scroll-btn right" @click="scrollRight">&#10094;</button>
-
-        <div class="scroll-container" ref="scrollContainer">
+        <div class="loading" v-if="productStore.loading">
+          دسته بندی ها در حال بارگذاری هستند...
+          <i class="fa fa-loader"></i>
+        </div>
+        <div class="scroll-container" v-else ref="scrollContainer">
           <div class="product-container">
             <ProductCard
               v-for="product in productStore.bestProducts"
@@ -27,8 +30,10 @@ import { useProductStore } from '@/stores/productstore'
 
 const productStore = useProductStore()
 
-onMounted(() => {
-  productStore.getBests()
+onMounted(async () => {
+  productStore.loading = true
+  await productStore.getBests()
+  productStore.loading = false
 })
 
 const scrollContainer = ref(null)
@@ -96,5 +101,12 @@ const scrollRight = () => {
 
 .scroll-container::-webkit-scrollbar {
   display: none;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1rem;
+  color: #6b7280;
+  margin: 1rem 0;
 }
 </style>

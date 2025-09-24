@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-container">
+  <div v-if="!cartStore.loading" class="cart-container rtl">
     <div v-if="cartStore.items.length === 0" class="empty-cart">سبد خرید شما خالی است 😢</div>
 
     <div v-else class="table-wrapper">
@@ -35,6 +35,9 @@
         </tbody>
       </table>
     </div>
+  </div>
+  <div v-else class="cart-container">
+    <i class="fa fa-loader empty-cart"></i>
   </div>
 </template>
 

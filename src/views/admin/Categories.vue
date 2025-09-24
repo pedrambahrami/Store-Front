@@ -1,79 +1,158 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useCategoryStore } from '@/stores/categoryStore'
+import { ref, onMounted, computed } from "vue";
+import { useCategoryStore } from "@/stores/categoryStore";
 
-const store = useCategoryStore()
+const store = useCategoryStore();
 
-const newCategory = ref('')
-const newImage = ref(null)
-const previewImage = ref(null)
+const newCategory = ref("");
+const newImage = ref(null);
+const previewImage = ref(null);
+
+// For cascading dropdowns
+const selectedLevel1 = ref(null);
+const selectedLevel2 = ref(null);
+const selectedLevel3 = ref(null);
 
 const handleImageUpload = (event) => {
-  const file = event.target.files[0]
+  const file = event.target.files[0];
   if (file) {
-    newImage.value = file
-    previewImage.value = URL.createObjectURL(file)
+    newImage.value = file;
+    previewImage.value = URL.createObjectURL(file);
   }
-}
+};
+
+// compute children based on selection
+const level2Options = computed(() => {
+  if (!selectedLevel1.value) return [];
+  const parent = store.categories.find(c => c.id === selectedLevel1.value);
+  return parent ? parent.children : [];
+});
+
+const level3Options = computed(() => {
+  if (!selectedLevel2.value) return [];
+  const parent = level2Options.value.find(c => c.id === selectedLevel2.value);
+  return parent ? parent.children : [];
+});
+
+// decide final parent_id
+const parentId = computed(() => {
+  return selectedLevel3.value || selectedLevel2.value || selectedLevel1.value || null;
+});
 
 const addCategory = async () => {
-  if (!newCategory.value.trim()) return
+  if (!newCategory.value.trim()) return;
 
-  console.log('Sending to API:', newCategory.value, newImage.value)
   await store.addCategory({
     name: newCategory.value,
+    parent_id: parentId.value,
     image: newImage.value,
-  })
+  });
 
-  newCategory.value = ''
-  newImage.value = null
-  previewImage.value = null
-}
+  // reset form
+  newCategory.value = "";
+  newImage.value = null;
+  previewImage.value = null;
+  selectedLevel1.value = null;
+  selectedLevel2.value = null;
+  selectedLevel3.value = null;
 
-onMounted(() => {
-  store.fetchCategories()
-})
+  await store.fetchCategories();
+};
+
+onMounted(async () => {
+  store.loading = true;
+  await store.fetchCategories();
+  store.loading = false;
+  console.log(store.categories);
+});
 </script>
 
 <template>
-  <div class="categories">
+  <div class="loading" v-if="store.loading">
+    <p>
+      دسته بندی ها در حال بارگذاری هستند...
+    </p>
+    <i class="fa fa-loader"></i>
+  </div>
+  <div class="categories" v-else>
     <h2 class="title">📂 دسته‌بندی‌ها</h2>
 
     <div class="add-section">
+      <!-- Category name -->
       <input
         type="text"
         v-model="newCategory"
         placeholder="نام دسته‌بندی جدید"
         class="input-text"
       />
-      <input type="file" accept="image/*" @change="handleImageUpload" class="file-input" />
 
+      <!-- Level 1 -->
+      <select v-model="selectedLevel1" class="input-text">
+        <option :value="null">دسته‌بندی اصلی</option>
+        <option
+          v-for="cat in store.nested_categories"
+          :key="cat.id"
+          :value="cat.id"
+        >
+          {{ cat.name }}
+        </option>
+      </select>
+
+      <!-- Level 2 -->
+      <select v-if="level2Options.length" v-model="selectedLevel2" class="input-text">
+        <option :value="null">انتخاب زیر‌دسته</option>
+        <option
+          v-for="cat in level2Options"
+          :key="cat.id"
+          :value="cat.id"
+        >
+          {{ cat.name }}
+        </option>
+      </select>
+
+      <!-- Level 3 -->
+      <select v-if="level3Options.length" v-model="selectedLevel3" class="input-text">
+        <option :value="null">انتخاب زیر‌زیر‌دسته</option>
+        <option
+          v-for="cat in level3Options"
+          :key="cat.id"
+          :value="cat.id"
+        >
+          {{ cat.name }}
+        </option>
+      </select>
+
+      <!-- Upload -->
+      <input
+        type="file"
+        accept="image/*"
+        @change="handleImageUpload"
+        class="file-input"
+      />
+
+      <!-- Preview -->
       <div v-if="previewImage" class="preview">
         <img :src="previewImage" alt="پیش‌نمایش" />
       </div>
 
+      <!-- Submit -->
       <button class="add-btn" @click="addCategory">➕ افزودن دسته‌بندی</button>
     </div>
-    <table class="catagory-table">
-      <thead>
-        <tr>
-          <th>نام دسته بندی </th>
-          <th>عکس دسته بندی</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="category in store.categories" :key="category.id">
-          <td>{{ category.name }}</td>
-          <td>
-            <img v-if="category.image" :src="category.image" alt="عکس دسته بندی" class="category-image">
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
+    <!-- List of categories -->
     <ul class="category-list">
-      <li v-for="(category) in store.categories" :key="category.id" class="category-item">
+      <li
+        v-for="category in store.categories"
+        :key="category.id"
+        class="category-item"
+      >
         <span class="category-name">{{ category.name }}</span>
-        <img v-if="category.image" :src="category.image" alt="عکس" class="category-image" />
+        <img
+          v-if="category.image"
+          :src="category.image"
+          alt="عکس"
+          class="category-image"
+        />
       </li>
     </ul>
   </div>
@@ -183,5 +262,12 @@ onMounted(() => {
   object-fit: cover;
   border-radius: 0.5rem;
   border: 1px solid #e5e7eb;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1rem;
+  color: #6b7280;
+  margin: 1rem 0;
 }
 </style>

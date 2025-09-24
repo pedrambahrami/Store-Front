@@ -6,6 +6,7 @@ export const useCartStore = defineStore('cart', {
   state: () => ({
     items: [],
     totalCount : 0,
+    loading: false,
   }),
   actions: {
     async addToCart(product) {
@@ -38,9 +39,11 @@ export const useCartStore = defineStore('cart', {
 
     async getusercart() {
       try {
+        this.loading = true
         const res = await Cartservice.getcartforuser()
         this.items = res.data.data.cart_items
         this.totalCount = this.items.length
+        this.loading = false
       } catch (error) {
         console.error('Error fetching user cart:', error)
       }
