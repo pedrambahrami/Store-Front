@@ -93,23 +93,30 @@
 
                   <li><router-link to="/contact">با ما تماس بگیرید</router-link></li>
                 </ul>
+
+                <li class="category-menu" :class="{ active: isCategoryOpen }">
+                  <a href="javascript:void(0)" class="category-toggle" @click="toggleCategory">
+                    <i class="fa fa-bars"></i> دسته‌بندی کالاها
+                  </a>
+                  <div class="mega-menu">
+                    <div v-for="cat in categories" :key="cat.id" class="mega-col">
+                      <h4>{{ cat.name }}</h4>
+                      <ul>
+                        <li v-for="sub in cat.subcategories" :key="sub.id">
+                          <router-link :to="'/category/' + sub.slug">{{ sub.name }}</router-link>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
               </nav>
             </div>
 
             <div class="col-auto">
               <div class="header-button">
                 <form action="#" class="header-form">
-                  <div class="form-group">
-                    <select name="category" id="category" class="form-select nice-select">
-                      <option value="" selected disabled>دسته‌ها</option>
-                      <option value="game-and-toy">بازی و اسباب بازی</option>
-                      <option value="kid-clothing">لباس کودک</option>
-                      <option value="kid-books">کتاب‌های کودک</option>
-                      <option value="indoor-play">بازی داخلی</option>
-                      <option value="smart-toys">اسباب بازی های هوشمند</option>
-                    </select>
-                    <i class="fa-sharp fa-solid fa-grid-2"></i>
-                  </div>
+                  <!-- جایگزین div.form-group با select -->
+
                   <div class="form-group">
                     <input
                       type="text"
@@ -126,7 +133,7 @@
                   <i class="far fa-heart"></i>
                 </router-link>
                 <button type="button" class="icon-btn sideMenuCart" @click="isCartOpen = true">
-                  <span class="badge">{{cartStore.totalCount}}</span>
+                  <span class="badge">{{ cartStore.totalCount }}</span>
                   <i class="far fa-basket-shopping"></i>
                 </button>
                 <button type="button" class="icon-btn sideMenuInfo d-none d-lg-block">
@@ -150,15 +157,56 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import CartSidebar from '@/components/CartSidebar.vue'
 const isCartOpen = ref(false)
 import { useCartStore } from '@/stores/cartStore'
-// می‌تونی بعدا از Pinia/Vuex بگیری
-const cartStore=useCartStore()
-onMounted(()=> {
+const cartStore = useCartStore()
+
+onMounted(() => {
   cartStore.getusercart()
 })
+const isCategoryOpen = ref(false)
+
+function toggleCategory() {
+  isCategoryOpen.value = !isCategoryOpen.value
+}
+
+const categories = ref([
+  {
+    id: 1,
+    name: 'کالای دیجیتال',
+    subcategories: [
+      { id: 11, name: 'موبایل', slug: 'mobile' },
+      { id: 12, name: 'لپ‌تاپ', slug: 'laptop' },
+      { id: 13, name: 'ساعت هوشمند', slug: 'smart-watch' },
+    ],
+  },
+  {
+    id: 2,
+    name: 'خانه و آشپزخانه',
+    subcategories: [
+      { id: 21, name: 'لوازم برقی', slug: 'home-appliances' },
+      { id: 22, name: 'دکوراسیون', slug: 'decoration' },
+    ],
+  },
+  {
+    id: 3,
+    name: 'مد و پوشاک',
+    subcategories: [
+      { id: 31, name: 'زنانه', slug: 'women' },
+      { id: 32, name: 'مردانه', slug: 'men' },
+    ],
+  },
+  {
+    id: 4,
+    name: 'سلامت و زیبایی',
+    subcategories: [
+      { id: 41, name: 'آرایشی', slug: 'cosmetics' },
+      { id: 42, name: 'بهداشتی', slug: 'health' },
+    ],
+  },
+])
 </script>
 
 <style>
@@ -176,5 +224,91 @@ onMounted(()=> {
 .slide-enter-from,
 .slide-leave-to {
   transform: translateX(-100%);
+}
+
+/* مگا منوی دسته بندی */
+.category-menu {
+  position: relative;
+}
+
+.category-menu .category-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.category-menu .category-toggle:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.category-menu .mega-menu {
+  display: none; /* پیش‌فرض مخفی */
+  position: absolute;
+  top: 100%; /* زیر خود li */
+  right: 0;
+  width: 600px;
+  background: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  z-index: 999;
+}
+
+.category-menu.active .mega-menu {
+  display: grid; /* وقتی کلاس active هست نمایش بده */
+}
+
+.mega-col h4 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.mega-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mega-col ul li {
+  margin-bottom: 6px;
+}
+
+.mega-col ul li a {
+  font-size: 13px;
+  color: #555;
+  text-decoration: none;
+}
+
+.mega-col ul li a:hover {
+  color: #ff6f61;
+}
+
+/* برای هماهنگی با منوی اصلی */
+.main-menu .category-menu {
+  display: inline-block; /* در کنار آیتم های ul قرار بگیرد */
+  vertical-align: middle;
+  margin-left: 15px;
+}
+
+.main-menu .category-menu .mega-menu {
+  right: 0;
+  top: 100%;
+}
+
+@media (max-width: 991px) {
+  /* در موبایل منو کامل می شود */
+  .main-menu .category-menu {
+    display: block;
+    margin-left: 0;
+  }
 }
 </style>
