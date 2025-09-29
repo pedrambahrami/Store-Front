@@ -48,7 +48,7 @@ import { useCartStore } from '@/stores/cartStore'
 const cartStore = useCartStore()
 
 onMounted(() => {
-  cartStore.getusercart() // این تابع داده‌های واقعی از بک‌اند رو می‌گیره
+  cartStore.getusercart() 
 })
 
 function formatPrice(value) {
@@ -57,19 +57,19 @@ function formatPrice(value) {
 
 function increaseQty(item) {
   item.quantity++
-  // اینجا می‌تونی API call بزنی تا بک‌اند بروزرسانی بشه
+
 }
 
 function decreaseQty(item) {
   if (item.quantity > 1) {
     item.quantity--
-    // API call برای بروزرسانی تعداد
+    
   }
 }
 
 function removeItem(id) {
   cartStore.removeFromCart(id)
-  // API call برای حذف محصول از بک‌اند
+  
 }
 </script>
 
@@ -91,7 +91,7 @@ function removeItem(id) {
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-/* جدول */
+
 .table-wrapper {
   overflow-x: auto;
 }
@@ -180,7 +180,7 @@ function removeItem(id) {
   transform: scale(1.05);
 }
 
-/* ریسپانسیو */
+
 @media (max-width: 1024px) {
   .cart-table th,
   .cart-table td {

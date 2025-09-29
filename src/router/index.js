@@ -12,6 +12,7 @@ import Categories from '@/views/admin/Categories.vue'
 import Customers from '@/views/admin/Customers.vue'
 import Settings from '@/views/admin/Settings.vue'
 import Cart from '@/views/Cart.vue'
+import AboutSection from '@/components/AboutSection.vue'
 
 const routes = [
   { path: '/', component: Home },
@@ -20,8 +21,7 @@ const routes = [
   { path: '/checkout', component: Checkout },
   { path: '/shop', component: Shop },
   { path: '/auth', name: 'AuthForm', component: AuthForm },
-
-  // 🔹 اضافه کردن مسیرهای ورود و تایید کد
+  { path: '/about', name: 'About' , component:AboutSection},
   {
     path: '/auth',
     name: 'auth',

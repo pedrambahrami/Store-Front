@@ -3,7 +3,7 @@
     <div class="container">
       <div class="footer-top">
         <div class="footer-row">
-          <!-- درباره ما -->
+        
           <div class="footer-col">
             <div class="footer-widget">
               <h4 class="footer-title">درباره ما</h4>
@@ -13,7 +13,7 @@
             </div>
           </div>
 
-          <!-- لینک‌های مفید -->
+     
           <div class="footer-col">
             <div class="footer-widget">
               <h4 class="footer-title">لینک‌های مفید</h4>
@@ -26,7 +26,6 @@
             </div>
           </div>
 
-          <!-- پشتیبانی مشتری -->
           <div class="footer-col">
             <div class="footer-widget">
               <h4 class="footer-title">پشتیبانی مشتری</h4>
@@ -39,7 +38,7 @@
             </div>
           </div>
 
-          <!-- شبکه‌های اجتماعی -->
+          
           <div class="footer-col">
             <div class="footer-widget">
               <h4 class="footer-title">ما را دنبال کنید</h4>
@@ -53,7 +52,6 @@
         </div>
       </div>
 
-      <!-- بخش پایانی -->
       <div class="footer-normal">
         <div class="copyright-wrap">
           <p class="copyright-text">
@@ -72,7 +70,7 @@
 <script setup></script>
 
 <style scoped>
-/* ساختار کلی */
+
 .footer-wrapper {
   background: #190449;
   padding: 40px 20px;
@@ -80,7 +78,7 @@
 
 }
 
-/* کانتینر */
+
 .container {
   max-width: 1200px;
   margin: 0 auto;

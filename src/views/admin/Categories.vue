@@ -8,7 +8,6 @@ const newCategory = ref("");
 const newImage = ref(null);
 const previewImage = ref(null);
 
-// For cascading dropdowns
 const selectedLevel1 = ref(null);
 const selectedLevel2 = ref(null);
 const selectedLevel3 = ref(null);
@@ -21,7 +20,6 @@ const handleImageUpload = (event) => {
   }
 };
 
-// compute children based on selection
 const level2Options = computed(() => {
   if (!selectedLevel1.value) return [];
   const parent = store.nested_categories.find(c => c.id === selectedLevel1.value);
@@ -34,7 +32,6 @@ const level3Options = computed(() => {
   return parent ? parent.children : [];
 });
 
-// decide final parent_id
 const parentId = computed(() => {
   return selectedLevel3.value || selectedLevel2.value || selectedLevel1.value || null;
 });
@@ -48,7 +45,6 @@ const addCategory = async () => {
     image: newImage.value,
   });
 
-  // reset form
   newCategory.value = "";
   newImage.value = null;
   previewImage.value = null;
@@ -78,7 +74,6 @@ onMounted(async () => {
     <h2 class="title">📂 دسته‌بندی‌ها</h2>
 
     <div class="add-section">
-      <!-- Category name -->
       <input
         type="text"
         v-model="newCategory"
@@ -86,7 +81,6 @@ onMounted(async () => {
         class="input-text"
       />
 
-      <!-- Level 1 -->
       <select v-model="selectedLevel1" class="input-text">
         <option :value="''">دسته‌بندی اصلی</option>
         <option
@@ -98,7 +92,6 @@ onMounted(async () => {
         </option>
       </select>
 
-      <!-- Level 2 -->
       <select v-if="level2Options.length" v-model="selectedLevel2" class="input-text">
         <option :value="null">انتخاب زیر‌دسته</option>
         <option
@@ -110,7 +103,6 @@ onMounted(async () => {
         </option>
       </select>
 
-      <!-- Level 3 -->
       <select v-if="level3Options.length" v-model="selectedLevel3" class="input-text">
         <option :value="null">انتخاب زیر‌زیر‌دسته</option>
         <option
@@ -122,7 +114,6 @@ onMounted(async () => {
         </option>
       </select>
 
-      <!-- Upload -->
       <input
         type="file"
         accept="image/*"
@@ -130,16 +121,13 @@ onMounted(async () => {
         class="file-input"
       />
 
-      <!-- Preview -->
       <div v-if="previewImage" class="preview">
         <img :src="previewImage" alt="پیش‌نمایش" />
       </div>
 
-      <!-- Submit -->
       <button class="add-btn" @click="addCategory">➕ افزودن دسته‌بندی</button>
     </div>
 
-    <!-- List of categories -->
     <ul class="category-list">
       <li
         v-for="category in store.categories"
@@ -163,8 +151,8 @@ onMounted(async () => {
   font-family: var(--title-font);
   direction: rtl;
   text-align: right;
-  width: 60%; /* عرض کامل */
-  margin: 0; /* وسط‌چین نبودن */
+  width: 60%; 
+  margin: 0; 
   padding: 1.5rem;
   background: #f9fafb;
   border-radius: 1rem;

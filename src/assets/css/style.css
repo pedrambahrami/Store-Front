@@ -5763,7 +5763,7 @@ a.text-theme:hover,
   width: 100%;
   max-width: 500px;
   border: 1px solid var(--ot-border-color);
-  border-radius: 25px;
+  border-radius: 20px;
   padding-right: 20px;
 }
 .header-form .form-group {
@@ -5773,7 +5773,7 @@ a.text-theme:hover,
   font-size: 14px;
   top: 18px;
   left: 20px;
-  left: unset;
+  
   color: var(--theme-color);
 }
 .header-form .form-control,

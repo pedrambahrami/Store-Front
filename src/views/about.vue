@@ -1,4 +1,5 @@
 <template>
+    
     <div class="breadcumb-wrapper background-image" style="background-image: url(&quot;assets/img/bg/breadcrumb-bg.png&quot;);">
             <div class="container">
                 <div class="breadcumb-content">
@@ -11,5 +12,7 @@
             </div>
         </div>
 </template>
-<script></script>
+<script>
+import AboutSection from '@/components/AboutSection.vue'; 
+</script>
 <style></style>

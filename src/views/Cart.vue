@@ -1,9 +1,10 @@
-<template>
-  <div>
+<template >
+  <div >
     <!-- Breadcrumb -->
     <div
       class="breadcumb-wrapper background-image"
       :style="{ backgroundImage: 'url(/img/bg/breadcrumb-bg.png)' }"
+      
     >
       <div class="container rtl">
         <div class="breadcumb-content">

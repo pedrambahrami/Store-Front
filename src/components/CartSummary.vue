@@ -2,7 +2,6 @@
   <div class="cart-summary-container">
     <div class="cart-summary-wrapper">
 
-      <!-- Coupon Code -->
       <div class="coupon-box container rtl ">
         <h3>کد تخفیف</h3>
         <div class="coupon-input-wrapper">
@@ -11,7 +10,6 @@
         </div>
       </div>
 
-      <!-- Summary -->
       <div class="summary-box  container rtl">
         <h3>جمع سبد خرید</h3>
 
@@ -81,7 +79,6 @@ function formatPrice(value) {
   }
 }
 
-/* Coupon Box */
 .coupon-box, .summary-box {
   flex: 1;
   border: 1px solid #ddd;
@@ -135,7 +132,6 @@ function formatPrice(value) {
   background-color: #218838;
 }
 
-/* Summary Box */
 .summary-item {
   display: flex;
   justify-content: space-between;
