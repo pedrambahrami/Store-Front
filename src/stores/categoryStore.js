@@ -38,8 +38,8 @@ export const useCategoryStore = defineStore('category', {
       this.error = null
       try {
         const res = await categoryService.fetchAllCategories()
-        this.categories = res.data.data
-        this.nested_categories = buildCategoryTree(res.data.data)
+        this.categories = res.data.data.categories
+        this.nested_categories = buildCategoryTree(res.data.data.categories)
       } catch (err) {
         this.error = err.response?.data?.message || 'خطا در دریافت دسته‌بندی‌ها'
       } finally {
@@ -59,7 +59,7 @@ export const useCategoryStore = defineStore('category', {
         }
         const res = await categoryService.addCategory(category)
       } catch (err) {
-        this.error = err.response?.data?.message || 'خطا در افزودن دسته‌بندی'
+        this.error = err.response?.error || 'خطا در افزودن دسته‌بندی'
       } finally {
         this.loading = false
       }

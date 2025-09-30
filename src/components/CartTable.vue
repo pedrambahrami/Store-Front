@@ -55,16 +55,12 @@ function formatPrice(value) {
   return new Intl.NumberFormat('fa-IR').format(value) + ' تومان'
 }
 
-function increaseQty(item) {
-  item.quantity++
-
+async function increaseQty(item) {
+  await cartStore.addToCartItem(item.id)
 }
 
-function decreaseQty(item) {
-  if (item.quantity > 1) {
-    item.quantity--
-    
-  }
+async function decreaseQty(item) {
+  await cartStore.subtractFromCartItem(item.id)
 }
 
 function removeItem(id) {

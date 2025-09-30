@@ -15,4 +15,7 @@ export default {
   async user() {
     return api.get('auth/user')
   },
+  async logout() {
+    return api.get('auth/logout')
+  }
 }

@@ -3,8 +3,8 @@
    
     <aside class="sidebar" :class="{ closed: !sidebarOpen }">
       <div class="logo">
-        <span>🛒</span>
-        <span>بیبی مارت</span>
+        <router-link to="/"><span>🛒</span>
+          <span>بیبی مارت</span></router-link>
       </div>
       <nav>
         <ul>
@@ -12,6 +12,12 @@
             <router-link :to="item.path" class="menu-link" :class="{ active: isActive(item.path) }">
               <span class="icon">{{ item.icon }}</span>
               <span class="label">{{ item.label }}</span>
+            </router-link>
+          </li>
+          <li onclick="store.logout()">
+            <router-link to="/" class="menu-link" :class="{ active: isActive('/') }">
+              <span class="icon">❌</span>
+              <span class="label">خروج</span>
             </router-link>
           </li>
         </ul>
@@ -36,6 +42,7 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import { ref } from 'vue'
+import { useAuthStore } from '@/stores/authStore.js'
 
 const route = useRoute()
 
@@ -47,6 +54,7 @@ const menuItems = [
   { path: '/admin/customers', label: 'مشتریان', icon: '👥' },
   { path: '/admin/settings', label: 'تنظیمات', icon: '⚙️' },
 ]
+const store = useAuthStore()
 
 const isActive = (path) => route.path === path
 const sidebarOpen = ref(false)

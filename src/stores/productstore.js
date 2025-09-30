@@ -21,7 +21,7 @@ export const useProductStore = defineStore('product', {
       try {
         this.dataLoading = true
         const response = await productService.get()
-        this.allProducts = response.data.data
+        this.allProducts = response.data.data.products
         toast.success('محصولات با موفقیت بارگذاری شدند!')
       } catch (error) {
         toast.error('خطا در بارگذاری محصولات')
@@ -34,7 +34,7 @@ export const useProductStore = defineStore('product', {
       try {
         this.dataLoading = true
         const response = await productService.bestsellers()
-        this.bestProducts = response.data.data
+        this.bestProducts = response.data.data.products
         toast.success('محصولات با موفقیت بارگذاری شدند!')
       } catch (error) {
         toast.error('خطا در بارگذاری محصولات')
