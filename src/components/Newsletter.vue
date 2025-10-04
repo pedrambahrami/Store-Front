@@ -45,8 +45,6 @@
 </template>
 
 <script setup>
-// const sectionTitle = 'آخرین اخبار و مقالات ما'
-// const sectionSubtitle = 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ'
 
 const posts = [
   {

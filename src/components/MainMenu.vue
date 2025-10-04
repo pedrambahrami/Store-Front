@@ -5,16 +5,16 @@
         <a href="javascript:void(0)">دسته‌بندی کالاها</a>
         <ul class="sub-menu">
           <li class="menu-item-has-children">
-            <a href="#">کالای دیجیتال</a>
+            <a href="#">کالای دیجیتال </a>
             <ul class="sub-menu">
-              <li><router-link to="/category/mobile">موبایل</router-link></li>
+              <li><router-link to="/category/mobile"> موبایل </router-link></li>
               <li><router-link to="/category/laptop">لپ‌تاپ</router-link></li>
               <li><router-link to="/category/camera">دوربین</router-link></li>
             </ul>
           </li>
 
           <li class="menu-item-has-children">
-            <a href="#">خانه و آشپزخانه</a>
+            <a href="#" >خانه و آشپزخانه </a>
             <ul class="sub-menu">
               <li><router-link to="/category/kitchen">لوازم آشپزخانه</router-link></li>
               <li><router-link to="/category/furniture">مبلمان</router-link></li>
@@ -128,6 +128,6 @@
 }
 .main-menu ul li .sub-menu li .sub-menu {
   top: 0;
-  right: 100%;
+  left : -240px;
 }
 </style>

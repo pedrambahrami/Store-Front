@@ -13,7 +13,6 @@ import { useRouter } from 'vue-router'
 const show = ref(true)
 const router = useRouter()
 
-// وقتی مسیر تغییر میکنه، لودینگ رو نمایش بده
 router.beforeEach((to, from, next) => {
   show.value = true
   next()
@@ -22,7 +21,7 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
   setTimeout(() => {
     show.value = false
-  }, 300) // 300ms fade effect
+  }, 300) 
 })
 </script>
 
@@ -51,7 +50,6 @@ router.afterEach(() => {
   100% { transform: rotate(360deg); }
 }
 
-/* Fade effect */
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.3s;
 }

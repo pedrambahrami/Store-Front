@@ -2,7 +2,7 @@
   <section class="about-sec1 space" id="about-sec">
     <div class="container rtl">
       <div class="row gy-40 align-items-center">
-        <!-- تصویر -->
+       
         <div class="col-xxl-7 col-xl-6">
           <div class="img-box1">
             <div class="img1">
@@ -11,7 +11,7 @@
           </div>
         </div>
 
-        <!-- متن و جزئیات -->
+        
         <div class="col-xxl-5 col-xl-6">
           <div class="about-wrap1">
             <div class="title-area mb-37">
@@ -48,7 +48,7 @@
               <div class="about-profile">
                 <div class="avater"><img src="/img/normal/about-profile1-1.png" alt="avater" /></div>
                 <div class="media-body">
-                  <h5 class="about-profile-name">ریچارد رونالد</h5>
+                  <h5 class="about-profile-name">پدرام بهرامی</h5>
                   <p class="desig">مدیر اجرایی</p>
                 </div>
               </div>
@@ -70,11 +70,9 @@
 </template>
 
 <script setup>
-// فعلاً نیازی به state یا props نیست، اگر خواستی می‌توانیم بعداً داینامیکش کنیم
 </script>
 
 <style scoped>
-/* می‌تونی CSS اصلی خودت رو اینجا بیاوری */
 .about-sec1 {
   padding: 80px 0;
 }

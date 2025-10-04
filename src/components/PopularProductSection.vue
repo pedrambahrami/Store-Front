@@ -60,8 +60,8 @@ const scrollRight = () => {
 }
 
 .product-container > * {
-  flex: 0 0 auto; /* ✅ جلوگیری از کوچک شدن کارت‌ها */
-  width: 300px; /* ✅ اندازه ثابت برای همه کارت‌ها */
+  flex: 0 0 auto; 
+  width: 300px;
 }
 
 .scroll-btn {

@@ -1,6 +1,5 @@
 <template>
   <div class="dashboard">
-    <!-- Header -->
     <header class="dashboard-header">
       <div>
         <h2 class="title">داشبورد</h2>
@@ -14,7 +13,6 @@
       </div>
     </header>
 
-    <!-- Stat cards -->
     <div class="stats-grid">
       <div class="stat-box blue">
         <div class="stat-top">
@@ -122,11 +120,9 @@
       </div>
     </div>
 
-    <!-- Charts + Recent orders -->
     <section class="content-grid">
       <div class="card chart-card">
         <h4>نمودار فروش ماهانه</h4>
-        <!-- نمودار ساده با SVG (placeholder). برای نمودار واقعی میشه Chart.js یا ApexCharts وصل کرد -->
         <svg
           class="bar-chart"
           viewBox="0 0 600 200"
@@ -178,12 +174,11 @@
 <script setup>
 import { ref } from 'vue'
 
-// داده‌های نمونه
 const stats = {
   totalSales: 4398000,
   newOrders: 12,
   customers: 245,
-  salesGrowth: 12, // درصد نسبت به دوره قبل
+  salesGrowth: 12, 
   ordersGrowth: -5,
   customersGrowth: 3,
   sparkSales: [120, 160, 140, 180, 220, 200, 260],
@@ -234,14 +229,13 @@ const recentOrders = ref([
   },
 ])
 
-// داده ماهانه ساده برای نمونه نمودار
+
 const monthlySales = [
   120000, 160000, 140000, 180000, 220000, 200000, 260000, 300000, 250000, 270000, 290000, 310000,
 ]
 const currentMonthIndex = new Date().getMonth() % 12
 
 function formatNumber(n) {
-  // جداسازی هزارگان (اعداد غربی) — اگر خواستی از 'fa-IR' digits هم میشه استفاده کرد
   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
@@ -285,7 +279,7 @@ function sparklinePoints(data = [], w = 120, h = 40) {
   background: var(--bg);
 }
 
-/* Header */
+
 .dashboard-header {
   display: flex;
   justify-content: space-between;
@@ -306,7 +300,7 @@ function sparklinePoints(data = [], w = 120, h = 40) {
   font-size: 0.95rem;
 }
 
-/* Quick actions */
+
 .quick-actions {
   display: flex;
   gap: 0.5rem;
@@ -326,7 +320,7 @@ function sparklinePoints(data = [], w = 120, h = 40) {
   box-shadow: 0 6px 14px rgba(79, 70, 229, 0.12);
 }
 
-/* Stat grid */
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -334,7 +328,7 @@ function sparklinePoints(data = [], w = 120, h = 40) {
   margin-top: 1rem;
 }
 
-/* Stat card */
+
 .stat-box {
   padding: 1rem;
   border-radius: 12px;
@@ -368,7 +362,7 @@ function sparklinePoints(data = [], w = 120, h = 40) {
   margin: 0.5rem 0 0;
 }
 
-/* colors */
+
 .stat-box.blue {
   background: linear-gradient(180deg, #e6f0ff, #dbeafe);
 }
@@ -379,7 +373,7 @@ function sparklinePoints(data = [], w = 120, h = 40) {
   background: linear-gradient(180deg, #fffbe6, #fef9c3);
 }
 
-/* growth */
+
 .growth {
   display: inline-flex;
   align-items: center;
@@ -400,7 +394,7 @@ function sparklinePoints(data = [], w = 120, h = 40) {
   color: #b91c1c;
 }
 
-/* sparkline */
+
 .sparkline {
   position: absolute;
   left: 12px;
@@ -410,7 +404,7 @@ function sparklinePoints(data = [], w = 120, h = 40) {
   height: 40px;
 }
 
-/* content grid (charts + orders) */
+
 .content-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -418,7 +412,7 @@ function sparklinePoints(data = [], w = 120, h = 40) {
   margin-top: 1rem;
 }
 
-/* cards */
+
 .card {
   background: var(--card);
   padding: 1rem;
@@ -431,14 +425,14 @@ function sparklinePoints(data = [], w = 120, h = 40) {
   font-size: 1rem;
 }
 
-/* bar chart placeholder */
+
 .bar-chart {
   width: 100%;
   height: 160px;
   display: block;
 }
 
-/* orders table */
+
 .orders-table {
   width: 100%;
   border-collapse: collapse;
@@ -459,7 +453,7 @@ function sparklinePoints(data = [], w = 120, h = 40) {
   border-top: 1px solid #f1f5f9;
 }
 
-/* badge */
+
 .badge {
   display: inline-block;
   padding: 0.25rem 0.6rem;
@@ -478,7 +472,7 @@ function sparklinePoints(data = [], w = 120, h = 40) {
   background: #ef4444;
 }
 
-/* responsive */
+
 @media (max-width: 900px) {
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);

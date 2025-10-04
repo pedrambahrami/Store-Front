@@ -14,7 +14,6 @@ import Footer from '@/components/Footer.vue'
 
 const route = useRoute()
 
-// مسیرهایی که هدر و فوتر نباید نمایش داده بشه
 const hiddenRoutes = ['/auth', '/register', '/OTP']
 
 const hideLayout = computed(() => {

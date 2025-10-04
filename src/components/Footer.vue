@@ -84,7 +84,7 @@
   margin: 0 auto;
 }
 
-/* سطر */
+
 .footer-row {
   display: flex;
   flex-wrap: wrap;
@@ -92,13 +92,12 @@
   gap: 30px;
 }
 
-/* ستون‌ها */
+
 .footer-col {
   flex: 1 1 220px;
   min-width: 200px;
 }
 
-/* ویجت‌ها */
 .footer-widget {
   margin-bottom: 20px;
 }
@@ -116,7 +115,6 @@
   line-height: 1.7;
 }
 
-/* لیست لینک‌ها */
 .footer-list {
   list-style: none;
   padding: 0;
@@ -138,7 +136,6 @@
   color: #00bbae;
 }
 
-/* شبکه‌های اجتماعی */
 .footer-social {
   display: flex;
   gap: 12px;
@@ -154,7 +151,6 @@
   color: #00bbae;
 }
 
-/* بخش پایانی */
 .footer-normal {
   margin-top: 40px;
   padding-top: 20px;

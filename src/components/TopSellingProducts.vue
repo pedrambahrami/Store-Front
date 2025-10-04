@@ -197,7 +197,6 @@ const products = ref([
     categories: ['cat1', 'cat4'],
     offer: '19%-',
   },
-  // ... ادامه محصولات را اضافه کنید
 ])
 
 const filteredProducts = computed(() => {
@@ -207,5 +206,4 @@ const filteredProducts = computed(() => {
 </script>
 
 <style scoped>
-/* سبک‌های اضافی در صورت نیاز */
 </style>

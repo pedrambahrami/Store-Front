@@ -1,4 +1,3 @@
-// src/services/brandService.js
 import api from './api'
 
 export default {

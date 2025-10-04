@@ -171,7 +171,6 @@ export default {
   text-align: right;
 }
 
-/* Assuming these styles are defined in a global stylesheet */
 .product-list-wrap1 {
   padding: 20px;
 }

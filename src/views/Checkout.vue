@@ -3,7 +3,6 @@
     <h2 class="text-center mb-4">تسویه حساب</h2>
 
     <div class="row">
-      <!-- فرم اطلاعات خریدار -->
       <div class="col-md-6">
         <h4>اطلاعات شما</h4>
         <form @submit.prevent="submitOrder">
@@ -27,7 +26,6 @@
         </form>
       </div>
 
-      <!-- سبد خرید -->
       <div class="col-md-6">
         <h4>سفارش شما</h4>
         <ul class="list-group mb-3">
@@ -66,7 +64,6 @@ const submitOrder = () => {
 
   alert('✅ سفارش با موفقیت ثبت شد!')
 
-  // پاک‌سازی
   cart.clearCart()
   form.value = { name: '', email: '', phone: '', address: '' }
 }

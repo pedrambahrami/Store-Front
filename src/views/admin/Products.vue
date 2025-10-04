@@ -78,7 +78,7 @@
 import { useProductStore } from '@/stores/productstore'
 import { onMounted } from 'vue'
 const productStore = useProductStore()
-// هندل دکمه
+
 onMounted(() => {
   productStore.getAllProducts()
 })
@@ -109,7 +109,7 @@ const onFileChange = (event) => {
   margin-bottom: 1.5rem;
 }
 
-/* فرم افزودن محصول */
+
 .add-product-form {
   font-family: var(--title-font);
   display: flex;
@@ -161,7 +161,7 @@ const onFileChange = (event) => {
   background-color: #4b5563;
 }
 
-/* جدول محصولات */
+
 .products-table {
   font-family: var(--title-font);
   width: 100%;
@@ -192,7 +192,7 @@ const onFileChange = (event) => {
   background-color: #f8fafc;
 }
 
-/* دکمه‌های ویرایش و حذف */
+
 .edit-product,
 .delete-product {
   padding: 0.4rem 0.8rem;
@@ -221,11 +221,11 @@ const onFileChange = (event) => {
   background-color: #b91c1c;
 }
 
-/* فیلدهای بالای فرم (label + input) */
+
 .products-label {
   width: 100%;
   display: flex;
-  flex-direction: column; /* لیبل‌ها و ورودی‌ها زیر هم */
+  flex-direction: column; 
   gap: 0.8rem;
   margin-bottom: 1.5rem;
   padding: 1rem;

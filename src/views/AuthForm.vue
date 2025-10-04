@@ -3,9 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import api from '@/services/api'
 import logo from '/img/logo.svg'
-// import { useAuthStore } from '@/stores/authStore' // اضافه شد
 
-// const auth = useAuthStore() // اضافه شد
 const router = useRouter()
 const phone_number = ref('')
 
@@ -16,11 +14,9 @@ const submitForm = async () => {
   }
 
   try {
-    // ارسال درخواست برای تولید OTP
 
     await api.post('auth/login', { phone_number: phone_number.value })
 
-    // هدایت به صفحه وارد کردن OTP
     router.push({ name: 'VerifyOtp', query: { phone_number: phone_number.value } })
   } catch (err) {
     console.error(err)

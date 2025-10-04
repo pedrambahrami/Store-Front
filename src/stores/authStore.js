@@ -1,4 +1,3 @@
-// src/stores/authStore.js
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -7,12 +6,10 @@ import api from '@/services/api'
 export const useAuthStore = defineStore('auth', () => {
   const router = useRouter()
 
-  // استیت‌ها
   const username = ref('')
   const loading = ref(false)
   const errorMsg = ref('')
 
-  // اکشن‌ها
   const sendOtp = async () => {
     if (!username.value.trim()) {
       errorMsg.value = 'لطفا شماره موبایل خود را وارد کنید'

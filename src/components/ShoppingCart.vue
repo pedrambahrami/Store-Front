@@ -48,13 +48,11 @@
         </tbody>
       </table>
 
-      <!-- اگر سبد خالی بود -->
       <div v-else class="text-center py-10">
         <h3>سبد خرید شما خالی است 😢</h3>
         <a href="/shop" class="ot-btn mt-4">رفتن به فروشگاه</a>
       </div>
 
-      <!-- جمع کل -->
       <div v-if="cartStore.items.length > 0" class="row justify-content-end mt-5">
         <div class="col-md-8 col-lg-7 col-xl-6">
           <h2 class="h4 summary-title">مجموع سبد خرید</h2>

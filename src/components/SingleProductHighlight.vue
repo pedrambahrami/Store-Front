@@ -6,7 +6,6 @@
         :style="{ backgroundImage: `url(${backgroundImage})` }"
       >
         <div class="body-particle" id="cta-particle">
-          <!-- Optional: If you're using particles.js or canvas effects -->
           <canvas class="particles-js-canvas-el" style="width: 100%; height: 100%"></canvas>
         </div>
 
@@ -62,5 +61,4 @@ defineProps({
 </script>
 
 <style scoped>
-/* می‌تونی استایل دلخواه اضافه کنی یا از کلاس‌های اصلی استفاده کنی */
 </style>

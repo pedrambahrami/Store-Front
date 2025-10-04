@@ -26,8 +26,6 @@
 </template>
 
 <script setup>
-// import { onMounted } from "vue"
-// import { useOrderStore } from "@/stores/orderStore"
 
 const orderStore = useOrderStore()
 

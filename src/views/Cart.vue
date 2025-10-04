@@ -1,6 +1,5 @@
 <template >
   <div >
-    <!-- Breadcrumb -->
     <div
       class="breadcumb-wrapper background-image"
       :style="{ backgroundImage: 'url(/img/bg/breadcrumb-bg.png)' }"
@@ -19,10 +18,8 @@
       </div>
     </div>
 
-    <!-- Cart Table -->
     <CartTable />
 
-    <!-- Cart Summary -->
     <CartSummary />
   </div>
 </template>
@@ -43,7 +40,6 @@ import CartSummary from '@/components/CartSummary.vue'
   margin-right: 10px;
 }
 
-/* انیمیشن مشابه قبل */
 @keyframes slideInUp {
   0% {
     opacity: 0;

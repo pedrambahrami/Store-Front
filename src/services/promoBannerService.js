@@ -1,4 +1,3 @@
-// src/services/promoBannerService.js
 import axios from "axios";
 
 const API_URL = "https://example.com/api/promo-banners";

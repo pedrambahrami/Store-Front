@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import Swal from 'sweetalert2'
 import App from './App.vue'
 import router from './router'
 import './assets/css/app.min.css'
@@ -16,3 +17,4 @@ const pinia = createPinia()
 app.use(pinia)
 app.use(router)
 app.mount('#app')
+app.use(VueSweetalert2, { Swal })

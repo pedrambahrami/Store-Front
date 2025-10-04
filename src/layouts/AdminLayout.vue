@@ -18,7 +18,6 @@
       </nav>
     </aside>
 
-  
     <main class="main-content" @click="handleMainClick">
       <header class="admin-header">
         <button class="toggle-btn" @click.stop="sidebarOpen = true">☰</button>
@@ -65,13 +64,13 @@ const handleMainClick = () => {
   direction: rtl;
   display: flex;
   min-height: 100vh;
-  background-color: #f3f4f6;
+  background-color: #8f9cb4;
 }
 
 
 .sidebar {
   width: 18rem;
-  background: linear-gradient(180deg, #1e3a8a, #1d4ed8);
+  background: linear-gradient(180deg, #1e3a8a, #000308);
   color: white;
   padding: 1.5rem;
   transition: all 0.3s ease;

@@ -1,6 +1,8 @@
 <template>
-    
-    <div class="breadcumb-wrapper background-image" style="background-image: url(&quot;assets/img/bg/breadcrumb-bg.png&quot;);">
+    <div>
+    <AboutSection />
+  </div>
+    <div class="breadcumb-wrapper background-image" style="background-image: url(/img/bg/breadcrumb-bg.png);">
             <div class="container">
                 <div class="breadcumb-content">
                     <h1 class="breadcumb-title" data-cue="slideInUp" data-show="true" style="animation-name: slideInUp; animation-duration: 900ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">درباره</h1>
@@ -13,6 +15,13 @@
         </div>
 </template>
 <script>
-import AboutSection from '@/components/AboutSection.vue'; 
+import AboutSection from '@/components/AboutSection.vue';
+
+export default {
+  components: {
+    AboutSection
+  }
+}
 </script>
+
 <style></style>
