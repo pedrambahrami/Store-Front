@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import authService from '@/services/authService.js'
 import api from '@/services/api'
 
 export const useAuthStore = defineStore('auth', () => {
@@ -29,11 +30,15 @@ export const useAuthStore = defineStore('auth', () => {
       loading.value = false
     }
   }
-
+  const logout = async () => {
+    await authService.logout()
+    router.push()
+  }
   return {
     username,
     loading,
     errorMsg,
     sendOtp,
+    logout,
   }
 })

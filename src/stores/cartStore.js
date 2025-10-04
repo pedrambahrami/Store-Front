@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import Cartservice from '@/services/Cartservice'
 import { toast } from 'vue3-toastify'
 
+
 export const useCartStore = defineStore('cart', {
   state: () => ({
     items: [],
@@ -48,5 +49,25 @@ export const useCartStore = defineStore('cart', {
         console.error('Error fetching user cart:', error)
       }
     },
+    async addToCartItem(itemId) {
+      try {
+        this.loading = true
+        const res = await Cartservice.addToItem(itemId)
+        this.items = res.data.data.cart_items
+        this.loading = false
+      } catch (e) {
+        console.log('Error adding to cart:', e)
+      }
+    },
+    async subtractFromCartItem(itemId) {
+      try {
+        this.loading = true
+        const res = await Cartservice.subtractFromItem(itemId)
+        this.items = res.data.data.cart_items
+        this.loading = false
+      } catch (e) {
+        console.log('Error subtracting to cart:', e)
+      }
+    }
   },
 })
