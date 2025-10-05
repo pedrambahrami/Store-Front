@@ -1,76 +1,70 @@
 <script setup>
-import { ref, onMounted, computed } from "vue";
-import { useCategoryStore } from "@/stores/categoryStore";
+import { ref, onMounted, computed } from 'vue'
+import { useCategoryStore } from '@/stores/categoryStore'
 
-const store = useCategoryStore();
+const store = useCategoryStore()
 
-const newCategory = ref("");
-const newImage = ref(null);
-const previewImage = ref(null);
+const newCategory = ref('')
+const newImage = ref(null)
+const previewImage = ref(null)
 
-const selectedLevel1 = ref(null);
-const selectedLevel2 = ref(null);
-const selectedLevel3 = ref(null);
+const selectedLevel1 = ref(null)
+const selectedLevel2 = ref(null)
+const selectedLevel3 = ref(null)
 
 const handleImageUpload = (event) => {
-  const file = event.target.files[0];
+  const file = event.target.files[0]
   if (file) {
-    newImage.value = file;
-    previewImage.value = URL.createObjectURL(file);
+    newImage.value = file
+    previewImage.value = URL.createObjectURL(file)
   }
-};
+}
 
 const level2Options = computed(() => {
-  if (!selectedLevel1.value) return [];
-  const parent = store.nested_categories.find(c => c.id === selectedLevel1.value);
-  return parent ? parent.children : [];
-});
+  if (!selectedLevel1.value) return []
+  const parent = store.nested_categories.find((c) => c.id === selectedLevel1.value)
+  return parent ? parent.children : []
+})
 
 const level3Options = computed(() => {
-  if (!selectedLevel2.value) return [];
-  const parent = level2Options.value.find(c => c.id === selectedLevel2.value);
-  return parent ? parent.children : [];
-});
+  if (!selectedLevel2.value) return []
+  const parent = level2Options.value.find((c) => c.id === selectedLevel2.value)
+  return parent ? parent.children : []
+})
 
 const parentId = computed(() => {
-  return selectedLevel3.value || selectedLevel2.value || selectedLevel1.value || null;
-});
+  return selectedLevel3.value || selectedLevel2.value || selectedLevel1.value || null
+})
 
 const addCategory = async () => {
-  if (!newCategory.value.trim()) return;
+  if (!newCategory.value.trim()) return
 
   await store.addCategory({
     name: newCategory.value,
     parent_id: parentId.value,
     image: newImage.value,
-  });
+  })
 
-  newCategory.value = "";
-  newImage.value = null;
-  previewImage.value = null;
-  selectedLevel1.value = null;
-  selectedLevel2.value = null;
-  selectedLevel3.value = null;
+  newCategory.value = ''
+  newImage.value = null
+  previewImage.value = null
+  selectedLevel1.value = null
+  selectedLevel2.value = null
+  selectedLevel3.value = null
 
-  await store.fetchCategories();
-};
+  await store.fetchCategories()
+}
 
 onMounted(async () => {
-  store.loading = true;
-  await store.fetchCategories();
-  store.loading = false;
-  console.log(store.categories);
-});
+  store.loading = true
+  await store.fetchCategories()
+  store.loading = false
+  console.log(store.categories)
+})
 </script>
 
 <template>
-  <div class="loading" v-if="store.loading">
-    <p>
-      دسته بندی ها در حال بارگذاری هستند...
-    </p>
-    <i class="fa fa-loader"></i>
-  </div>
-  <div class="categories" v-else>
+  <div class="categories">
     <h2 class="title">📂 دسته‌بندی‌ها</h2>
 
     <div class="add-section">
@@ -83,43 +77,26 @@ onMounted(async () => {
 
       <select v-model="selectedLevel1" class="input-text">
         <option :value="''">دسته‌بندی اصلی</option>
-        <option
-          v-for="cat in store.nested_categories"
-          :key="cat.id"
-          :value="cat.id"
-        >
+        <option v-for="cat in store.nested_categories" :key="cat.id" :value="cat.id">
           {{ cat.name }}
         </option>
       </select>
 
       <select v-if="level2Options.length" v-model="selectedLevel2" class="input-text">
         <option :value="null">انتخاب زیر‌دسته</option>
-        <option
-          v-for="cat in level2Options"
-          :key="cat.id"
-          :value="cat.id"
-        >
+        <option v-for="cat in level2Options" :key="cat.id" :value="cat.id">
           {{ cat.name }}
         </option>
       </select>
 
       <select v-if="level3Options.length" v-model="selectedLevel3" class="input-text">
         <option :value="null">انتخاب زیر‌زیر‌دسته</option>
-        <option
-          v-for="cat in level3Options"
-          :key="cat.id"
-          :value="cat.id"
-        >
+        <option v-for="cat in level3Options" :key="cat.id" :value="cat.id">
           {{ cat.name }}
         </option>
       </select>
 
-      <input
-        type="file"
-        accept="image/*"
-        @change="handleImageUpload"
-        class="file-input"
-      />
+      <input type="file" accept="image/*" @change="handleImageUpload" class="file-input" />
 
       <div v-if="previewImage" class="preview">
         <img :src="previewImage" alt="پیش‌نمایش" />
@@ -129,18 +106,9 @@ onMounted(async () => {
     </div>
 
     <ul class="category-list">
-      <li
-        v-for="category in store.categories"
-        :key="category.id"
-        class="category-item"
-      >
+      <li v-for="category in store.categories" :key="category.id" class="category-item">
         <span class="category-name">{{ category.name }}</span>
-        <img
-          v-if="category.image"
-          :src="category.image"
-          alt="عکس"
-          class="category-image"
-        />
+        <img v-if="category.image" :src="category.image" alt="عکس" class="category-image" />
       </li>
     </ul>
   </div>
@@ -151,8 +119,8 @@ onMounted(async () => {
   font-family: var(--title-font);
   direction: rtl;
   text-align: right;
-  width: 60%; 
-  margin: 0; 
+  width: 60%;
+  margin: 0;
   padding: 1.5rem;
   background: #f9fafb;
   border-radius: 1rem;
@@ -182,6 +150,7 @@ onMounted(async () => {
   outline: none;
   transition: all 0.2s;
 }
+
 .input-text:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
@@ -190,8 +159,8 @@ onMounted(async () => {
 .file-input {
   font-size: 18px;
   border-radius: 10px;
-  margin: 0 auto; 
-  display: block; 
+  margin: 0 auto;
+  display: block;
 }
 
 .add-btn {
@@ -205,10 +174,12 @@ onMounted(async () => {
   font-weight: 500;
   transition: all 0.3s;
 }
+
 .add-btn:hover {
   background-color: #1d4ed8;
   transform: translateY(-1px);
 }
+
 .add-btn:active {
   transform: translateY(0);
 }

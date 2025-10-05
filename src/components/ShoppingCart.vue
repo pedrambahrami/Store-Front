@@ -27,7 +27,13 @@
                 <button @click="decreaseQuantity(item)" class="quantity-minus qty-btn">
                   <i class="far fa-minus"></i>
                 </button>
-                <input type="number" class="qty-input" v-model.number="item.quantity" min="1" max="99" />
+                <input
+                  type="number"
+                  class="qty-input"
+                  v-model.number="item.quantity"
+                  min="1"
+                  max="99"
+                />
                 <button @click="increaseQuantity(item)" class="quantity-plus qty-btn">
                   <i class="far fa-plus"></i>
                 </button>
@@ -66,7 +72,9 @@
             <tfoot>
               <tr class="order-total">
                 <td>مجموع سفارش</td>
-                <td><strong>{{ totalPrice.toLocaleString() }} تومان</strong></td>
+                <td>
+                  <strong>{{ totalPrice.toLocaleString() }} تومان</strong>
+                </td>
               </tr>
             </tfoot>
           </table>
@@ -77,13 +85,12 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useCartStore } from '@/stores/cartStore'
-
-const cartStore = useCartStore()
 
 function removeItem(id) {
   cartStore.removeFromCart(id)
@@ -101,7 +108,5 @@ function decreaseQuantity(item) {
   }
 }
 
-const totalPrice = computed(() =>
-  cartStore.items.reduce((sum, p) => sum + p.price * p.quantity, 0)
-)
+const totalPrice = computed(() => cartStore.items.reduce((sum, p) => sum + p.price * p.quantity, 0))
 </script>
