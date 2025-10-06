@@ -1,3 +1,29 @@
+<template>
+  <div class="auth-wrapper">
+    <div class="logo-container">
+      <a href="/">
+        <img :src="logo" alt="لوگو" />
+      </a>
+    </div>
+
+    <div class="auth-content">
+      <h1>کد تایید</h1>
+      <p>کد ارسال شده به {{ phone_number }} را وارد کنید</p>
+
+      <form @submit.prevent="verifyOtp">
+        <label>
+          <input type="text" v-model="otp" placeholder="کد تایید" />
+        </label>
+        <button type="submit">تایید</button>
+      </form>
+
+      <p class="terms">
+        اگر کد را دریافت نکردید،
+        <a href="/auth"> دوباره تلاش کنید </a>
+      </p>
+    </div>
+  </div>
+</template>
 <script setup>
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -29,33 +55,6 @@ const verifyOtp = async () => {
   }
 }
 </script>
-
-<template>
-  <div class="auth-wrapper">
-    <div class="logo-container">
-      <a href="/">
-        <img :src="logo" alt="لوگو" />
-      </a>
-    </div>
-
-    <div class="auth-content">
-      <h1>کد تایید</h1>
-      <p>کد ارسال شده به {{ phone_number }} را وارد کنید</p>
-
-      <form @submit.prevent="verifyOtp">
-        <label>
-          <input type="text" v-model="otp" placeholder="کد تایید" />
-        </label>
-        <button type="submit">تایید</button>
-      </form>
-
-      <p class="terms">
-        اگر کد را دریافت نکردید،
-        <a href="/auth"> دوباره تلاش کنید </a>
-      </p>
-    </div>
-  </div>
-</template>
 
 <style scoped>
 .auth-wrapper {
